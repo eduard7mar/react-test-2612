@@ -10,18 +10,18 @@ const HeaderContainer = styled.header`
   align-items: center;
   border-bottom: 1px solid #ccc;
   background: #fafafa;
-`
+`;
 
 export default function Header() {
-    const [now, setNow] = useState(new Date());
+  const [now, setNow] = useState(new Date());
 
-    setInterval(() => setNow(new Date()), 1000);
+  setInterval(() => setNow(new Date()), 1000);
 
-    return(
-      <HeaderContainer>
-        <img src={logo} alt={"Result"} />
-        <span>Time: {now.toLocaleTimeString()}</span>
-      </HeaderContainer>
-    )
-  }
-  
+  return (
+    <HeaderContainer>
+      <img src={logo} alt={"Result"} />
+      <span>Time: {now.toLocaleTimeString()}</span>
+    </HeaderContainer>
+  );
+}
+
