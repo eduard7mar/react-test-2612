@@ -2,11 +2,23 @@ import { useState } from "react";
 import Button from "./Button/Button";
 
 export default function FeedbackSection() {
-  const [name, setName] = useState("");
-  const [reason, setReason] = useState("help");
+  const [form, setForm] = useState({
+    name: "",
+    hasError: true,
+    reason: "help",
+  });
+  // const [name, setName] = useState("");
+  // const [hasError, setHasError] = useState(false);
+  // const [reason, setReason] = useState("help");
 
   function handleNameChange(event) {
-    setName(event.target.value);
+    // setName(event.target.value);
+    // setHasError(event.target.value.trim().length === 0)
+    setForm((prev) => ({
+      ...prev,
+      name: event.target.value,
+      hasError: event.target.value.trim().length === 0,
+    }));
   }
 
   return (
@@ -19,7 +31,10 @@ export default function FeedbackSection() {
           type="text"
           id="name"
           className="control"
-          value={name}
+          value={form.name}
+          style={{
+            border: form.hasError ? "1px solid red" : null,
+          }}
           onChange={handleNameChange}
         />
 
@@ -27,15 +42,19 @@ export default function FeedbackSection() {
         <select
           id="reason"
           className="control"
-          value={reason}
-          onChange={(event) => setReason(event.target.value)}
+          value={form.reason}
+          onChange={(event) =>
+            setForm((prev) => ({ ...prev, reason: event.target.value }))
+          }
         >
           <option value="error">Error</option>
           <option value="help">Need help</option>
           <option value="suggest">Cooperation proposal</option>
         </select>
 
-        <Button>Send</Button>
+        <Button disabled={form.hasError} isActive={!form.hasError}>
+          Send
+        </Button>
       </form>
     </section>
   );
