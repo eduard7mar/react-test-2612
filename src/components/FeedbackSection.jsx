@@ -1,6 +1,15 @@
 import { useState } from "react";
 import Button from "./Button/Button";
 
+function StateVsRef() {
+  return(
+    <div>
+      <h3>Input value</h3>
+      <input type="text"/>
+    </div>
+  )
+}
+
 export default function FeedbackSection() {
   const [form, setForm] = useState({
     name: "",
@@ -55,6 +64,8 @@ export default function FeedbackSection() {
         <Button disabled={form.hasError} isActive={!form.hasError}>
           Send
         </Button>
+
+        <StateVsRef />
       </form>
     </section>
   );
